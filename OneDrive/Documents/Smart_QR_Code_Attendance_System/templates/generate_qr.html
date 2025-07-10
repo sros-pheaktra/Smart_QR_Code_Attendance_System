@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generate QR Code</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            margin-top: 20px;
+            font-size: 2rem;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input {
+            width: 80%;
+            max-width: 300px;
+            padding: 10px;
+            margin: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button, a {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            font-size: 1rem;
+            display: inline-block;
+            margin: 10px 0;
+        }
+
+        button:hover, a:hover {
+            background-color: #005fa3;
+        }
+
+        .message {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: green;
+        }
+
+        img {
+            margin-top: 10px;
+            max-width: 300px;
+            width: 80%;
+            height: auto;
+        }
+
+        @media (max-width: 600px) {
+            input, button, a {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Generate QR Code</h1>
+
+    <form method="POST">
+        <input type="text" name="student_id" placeholder="Student ID" required>
+        <input type="text" name="name" placeholder="Student Name" required>
+        <button type="submit">Generate</button>
+    </form>
+
+    {% if qr_path %}
+        <div class="message">
+            <p>QR Code for <strong>{{ name }}</strong> has been generated successfully!</p>
+            <img src="{{ qr_path }}" alt="QR Code">
+            <br>
+            <a href="{{ url_for('download_qr', filename=qr_path.split('/')[-1]) }}">Download QR Code</a>
+        </div>
+        <form method="GET" action="{{ url_for('generate_qr') }}">
+            <button type="submit">Generate Another QR Code</button>
+        </form>
+    {% endif %}
+</body>
+</html>

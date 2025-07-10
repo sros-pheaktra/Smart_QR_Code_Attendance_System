@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        h1 {
+            color: #333;
+            margin: 20px 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 20px 0;
+            width: 100%;
+            max-width: 400px;
+        }
+
+        li {
+            margin: 10px 0;
+        }
+
+        a {
+            display: block;
+            text-decoration: none;
+            background-color: #007bff;
+            color: #fff;
+            padding: 10px 15px;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1rem;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+
+        @media (max-width: 600px) {
+            a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the QR Attendance System</h1>
+    <ul>
+        {% if role == 'admin' %}
+            <li><a href="{{ url_for('records') }}">View Attendance Records</a></li>
+            <li><a href="{{ url_for('export') }}">Export Attendance</a></li>
+        {% endif %}
+        <li><a href="{{ url_for('search_attendance') }}">Search Attendance</a></li>
+        <li><a href="{{ url_for('generate_qr') }}">Generate QR Code</a></li>
+        <li><a href="{{ url_for('logout') }}">Logout</a></li>
+    </ul>
+</body>
+</html>

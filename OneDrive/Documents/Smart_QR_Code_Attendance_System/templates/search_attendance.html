@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Attendance</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            text-align: center;
+            padding: 20px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        input {
+            padding: 10px;
+            margin: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #0077cc;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #005fa3;
+        }
+        table {
+            margin-top: 20px;
+            width: 100%;
+            margin-left: auto;
+            margin-right: auto;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th {
+            background-color: #0077cc;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h1>Search Attendance Records</h1>
+
+    <form method="POST">
+        <input type="text" name="student_id" placeholder="Enter Student ID" required>
+        <button type="submit">Search</button>
+    </form>
+
+    {% if results %}
+        <h2>Search Results</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>N°</th>
+                    <th>Student ID</th>
+                    <th>Name</th>
+                    
+                    <th>Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in results %}
+                <tr>
+                    <td>{{ record[0] }}</td>
+                    <td>{{ record[1] }}</td>
+                    <td>{{ record[2] }}</td>      
+                    <td>{{ record[3] }}</td>      
+                         
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
